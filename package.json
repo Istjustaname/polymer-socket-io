@@ -1,0 +1,11 @@
+{
+  "name": "@istjustaname/polymer-socket-io",
+  "version": "1.0.0",
+  "engines": {
+    "npm": ">= 6.0.0"
+  },
+  "dependencies": {
+    "@polymer/polymer": "^3.0.5",
+    "socket.io-client": "^2.1.1"
+  }
+}
