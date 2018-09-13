@@ -66,4 +66,6 @@ import "socket.io-client/dist/socket.io.js";
     }
   }
 
-  window.customElements.define('socket-io', SocketIO);
+  if (!customElements.get('socket-io')) {
+    customElements.define('socket-io', SocketIO);
+}
