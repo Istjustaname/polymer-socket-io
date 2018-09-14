@@ -1,5 +1,5 @@
 import {PolymerElement, html} from '@polymer/polymer';
-import "socket.io-client/dist/socket.io.js";
+import io from "socket.io-client";
 
 window.__getSocket = (ep) => {
   const endpoint = ep || '';
