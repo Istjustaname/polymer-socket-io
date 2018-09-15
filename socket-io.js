@@ -51,23 +51,22 @@ class SocketIO extends PolymerElement {
     // Attach handlers for all browsers
     var _this = this;
     script.onload = script.onreadystatechange = function() {
-    if ( !done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") ) {
-      done = true;
-      console.log('Finished Loading Socket-IO Script');
+      if ( !done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") ) {
+        done = true;
+        console.log('Finished Loading Socket-IO Script');
 
 
-      this.socket = window.__getSocket(this.endpoint);
+        this.socket = window.__getSocket(this.endpoint);
+        this.socket.on('connected', () => this._onConnect());
+        this.socket.on('disconnected', () => this._onDisconnect());
+
+        Object.keys(this.events).forEach((key) => {
+          this.socket.on(key, this.events[key]);
+        })
       }
     };
 
     head.append(script);
-
-    this.socket.on('connected', () => this._onConnect());
-    this.socket.on('disconnected', () => this._onDisconnect());
-
-    Object.keys(this.events).forEach((key) => {
-      this.socket.on(key, this.events[key]);
-    })
   }
   
 
