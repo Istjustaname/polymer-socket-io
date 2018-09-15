@@ -66,4 +66,4 @@ class SocketIO extends PolymerElement {
   }
 }
 
-customElements.define('socket-io', SocketIO);
+window.customElements.define('socket-io', SocketIO);
