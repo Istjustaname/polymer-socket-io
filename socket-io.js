@@ -1,6 +1,8 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 
 window.__getSocket = (ep) => {
+
+  console.log(ep)
   const endpoint = ep || '';
 
   if (!window.__SOCKETS) {
