@@ -1,5 +1,4 @@
 import {PolymerElement, html} from '@polymer/polymer';
-import "socket.io-client/dist/socket.io.js";
 
 window.__getSocket = (ep) => {
   const endpoint = ep || '';
@@ -43,7 +42,25 @@ class SocketIO extends PolymerElement {
   }
 
   connectedCallback() {
-    this.socket = window.__getSocket(this.endpoint);
+    console.log("Connection In Progress");
+    var head = document.getElementsByTagName("head")[0] || document.documentElement;
+    var script = document.createElement("script");
+    script.src = this._getClientUrl(this.endpoint);
+    // Handle Script loading
+    var done = false;
+    // Attach handlers for all browsers
+    var _this = this;
+    script.onload = script.onreadystatechange = function() {
+    if ( !done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") ) {
+      done = true;
+      console.log('Finished Loading Socket-IO Script');
+
+
+      this.socket = _this.__getSocket(this.endpoint);
+      }
+    };
+
+    head.append(script);
 
     this.socket.on('connected', () => this._onConnect());
     this.socket.on('disconnected', () => this._onDisconnect());
@@ -52,6 +69,14 @@ class SocketIO extends PolymerElement {
       this.socket.on(key, this.events[key]);
     })
   }
+  
+
+  _getClientUrl (endpoint) {
+    if (endpoint.slice(-1) === '/') {
+      return endpoint + 'socket.io/socket.io.js';
+    }
+    return endpoint + '/socket.io/socket.io.js';
+  },
 
   emit(key, value) {
     this.socket.emit(key, value);
