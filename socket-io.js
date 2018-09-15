@@ -56,12 +56,12 @@ class SocketIO extends PolymerElement {
         console.log('Finished Loading Socket-IO Script');
 
 
-        this.socket = window.__getSocket(this.endpoint);
-        this.socket.on('connected', () => this._onConnect());
-        this.socket.on('disconnected', () => this._onDisconnect());
+        _this.socket = window.__getSocket(_this.endpoint);
+        _this.socket.on('connected', () => _this._onConnect());
+        _this.socket.on('disconnected', () => _this._onDisconnect());
 
-        Object.keys(this.events).forEach((key) => {
-          this.socket.on(key, this.events[key]);
+        Object.keys(_this.events).forEach((key) => {
+          _this.socket.on(key, _this.events[key]);
         })
       }
     };
