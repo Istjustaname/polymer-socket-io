@@ -56,7 +56,7 @@ class SocketIO extends PolymerElement {
       console.log('Finished Loading Socket-IO Script');
 
 
-      this.socket = _this.__getSocket(this.endpoint);
+      this.socket = window.__getSocket(this.endpoint);
       }
     };
 
