@@ -76,7 +76,7 @@ class SocketIO extends PolymerElement {
       return endpoint + 'socket.io/socket.io.js';
     }
     return endpoint + '/socket.io/socket.io.js';
-  },
+  }
 
   emit(key, value) {
     this.socket.emit(key, value);
