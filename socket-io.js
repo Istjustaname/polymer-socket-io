@@ -71,8 +71,8 @@ class SocketIO extends PolymerElement {
   }
   
 
-  _getClientUrl (endpoint) {
-    const ep = endpoint || '';
+  _getClientUrl (ep) {
+    const endpoint = ep || '';
     if (endpoint.slice(-1) === '/') {
       return endpoint + 'socket.io/socket.io.js';
     }
